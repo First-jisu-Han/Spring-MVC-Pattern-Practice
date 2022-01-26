@@ -1,8 +1,10 @@
 package hello.springmvc.basic.request;
 
+import hello.springmvc.basic.HelloData;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -64,16 +66,37 @@ public class RequestParamController {
     @ResponseBody // 해당 파라미터 값이 한개임이 확실할때는 Map을 사용한다.
     @RequestMapping("/request-param-map")
     public String requestParamMap(@RequestParam Map<String,Object> paramMap){
-
         log.info("username={}, age={}",paramMap.get("username"),paramMap.get("age"));
         return "ok";
     }
+
     @ResponseBody // 해당 파라미터의 값이 여러개일 경우 MultiValueMap 을 사용한다.
     @RequestMapping("/request-param-multivaluemap")
     public String requestParamMap(@RequestParam MultiValueMap<String,Object> multiValueMap){
 
         log.info("username={}, age={}",multiValueMap.get("username"),multiValueMap.get("age"));
         return "ok";
+    }
+    @ResponseBody // 해당 파라미터의 값이 여러개일 경우 MultiValueMap 을 사용한다.
+    @RequestMapping("/model-attribute-v1")
+    public String modelAttributeV1(@RequestParam("username") String username, @RequestParam("age") int age){
+        HelloData helloData=new HelloData();
+        helloData.setUsername(username);
+        helloData.setAge(age);
+        log.info("username={}, age={}",helloData.getUsername(),helloData.getAge());
+
+
+        return "ok";
+
+    }
+    @ResponseBody // 해당 파라미터의 값이 여러개일 경우 MultiValueMap 을 사용한다.
+    @RequestMapping("/model-attribute-v2")
+    public String modelAttributeV1(@ModelAttribute HelloData helloData) {
+        log.info("username={}, age={}",helloData.getUsername(),helloData.getAge());
+
+
+        return "ok";
+
     }
 
 }
