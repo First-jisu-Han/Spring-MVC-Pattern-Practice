@@ -77,6 +77,8 @@ public class RequestBodyJsonController {
         log.info("username={}, age={}",helloData.getUsername(),helloData.getAge());
         return "ok";
     }
+
+
     @PostMapping("/request-body-json-v5")
     @ResponseBody
     public HelloData requestBodyJsonV4(@RequestBody HelloData data) {  // RequestBody 때문에 Json 이 객체가 됐다가 -> ResponseBody 때문에 다시 Json으로 나감
