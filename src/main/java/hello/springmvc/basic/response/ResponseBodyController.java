@@ -19,8 +19,6 @@ import java.io.IOException;
 @Controller
 public class ResponseBodyController {
 
-
-
     // 서블릿을 직접 다룰때처럼 , HttpServletResponse객체를 통해서 Http 메세지 바디에 직접 응답메세지 전달
     @GetMapping("/response-body-string-v1")
     public void reposneBodyV1(HttpServletRequest request, HttpServletResponse response) throws IOException {
