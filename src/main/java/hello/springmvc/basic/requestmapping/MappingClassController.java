@@ -1,5 +1,7 @@
 package hello.springmvc.basic.requestmapping;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 /*
@@ -15,6 +17,8 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class MappingClassController {
+
+    private final Logger logger= LoggerFactory.getLogger(getClass());
 
     @GetMapping("/mapping/users")
     public String user(){
@@ -36,6 +40,11 @@ public class MappingClassController {
     public String DeleteUser(@PathVariable String userId){
         return "delete userId" +userId ;
     }    // 응답결과 : delete userId userA
-
+    @GetMapping("/mapping/namer/{name}")
+    public String getNamer(@PathVariable("name") String name){
+        logger.info("name is {}",name);
+        return "PathVairable을 통해 이름을 받는다"+ name;
+        // 매세지 바디에 바로 출력
+    }
 
 }
